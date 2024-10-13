@@ -1,0 +1,147 @@
+package praesensaufgaben1;
+import java.util.ArrayList;
+
+public class FormattedText {
+
+	//zeilen in arrylist 
+	//arraylisyt intteger gfür ggekürzte zeile 
+	
+	private ArrayList<String> buchZeilen;
+	private ArrayList<Integer> indexe;
+	private int maxWidth;
+	
+	
+	
+	public FormattedText(int maxWidth) {
+		//Erzeugt ein Objekt mit der angegebenen maximalen Anzahl von Zeichen
+		//pro Zeile
+		
+		this.buchZeilen  = new ArrayList<String>();
+		this.indexe = new ArrayList<Integer>();
+		this.maxWidth = maxWidth;
+		
+	}
+	
+	public void add(String s) {
+		//Fuegt den angegebenen String dem Objekt hinzu. Falls s breiter ist
+		//als die Maximalbreite, wird der String am letzten moeglichen Leerzeichen
+		//getrennt und der Rest in die naechste Zeile geschrieben. Eventuell folgen
+		//dann weitere Umbrueche.
+		//Falls auch dies nicht geht (bei sehr langen Woertern), wird:
+		// - am anschliessenden Leerzeichen getrennt,
+		// - die ueberlange Zeile auf die maximale Zeichenzahl gekuerzt und
+		// - die Zeilennummer einer Liste der gekuerzten Zeilen hinzugefuegt.
+		//Zu Beginn wird eine neue Zeile begonnen. Schon vorhandene Zeilen werden
+		//nicht aufgefuellt.
+		String [] strArr  = s.trim().split("\n");
+		int counter = 0; // count the characters in a text
+			
+		//zaehlt bis this.width
+		for (int i = 0; i < strArr.length; i++) {
+			
+			String tempStr = ""; // hier wird der lange zeile gehalten der bis maxWidth lang ist.
+			if(strArr[i].length() > this.maxWidth) {
+				
+				//wenn der wort mehr als 20 char hat, wird sie splittet, und rest weggeschmissen.
+				if(tempStr.isEmpty()) {
+					tempStr = strArr[i].substring(0, this.maxWidth-3); //bis 17 charakter 
+					indexe.add(i); // der index von dem abgeschnittenen part wurde gemerkt
+					this.buchZeilen.add(tempStr); // den langen wort in die buchzeile schreiben
+					tempStr = "";
+					counter = 0;
+				}
+				// Fals der String nicht leer ist und es kommt ein langes wort.
+				else if(strArr[i].length() + counter <= this.maxWidth){
+					
+					this.buchZeilen.add(strArr[i]);
+					tempStr = "";
+					counter += strArr[i].length();
+				}
+				
+			}
+			
+			
+			//leerzeichen mit zaeehlen +1
+			if(counter + strArr[i].length()+1< this.maxWidth) {
+				counter += strArr[i].length() +1;
+				//word ins tempStr eingefügt um am ende ins Buchzeile einzutragen
+				tempStr +=  strArr[i]+ " ";
+			}
+			else if(counter + strArr[i].length() == this.maxWidth) {
+				tempStr +=  strArr[i];
+				counter += strArr[i].length();
+			}
+			else
+				counter += strArr[i].length();
+			
+			if (counter >= this.maxWidth){
+				buchZeilen.add(tempStr);
+				tempStr = "";
+				counter = 0;
+			}
+				
+		
+			
+				
+				
+				
+		}
+			//
+			
+			
+			//leerzeichen finden
+			for (int i = 0; i < this.maxWidth; i++) {
+				if(s.lastIndexOf("\n")  == -1) {
+					//ganzes word
+				}
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		
+		
+		
+		
+	}
+	
+	public String getZeile(int i) {
+		
+	}
+	//Gibt die Zeile Nummer i zurueck. Der Fall, dass die Zeile nicht
+	//existiert, muss nicht gesondert behandelt werden.
+
+	
+	
+	public void print() {
+		//Gibt den kompletten Text zeilenweise auf dem Bildschirm aus. An gekuerzte
+		//Zeilen werden 3 Punkte (...) angehängt.
+	}
+	
+	public boolean isGekuerzt(int i) {
+		//Gibt zurueck, ob die Zeile i gekuerzt ist. Nicht vorhandene Zeilen
+		//sind nicht gekuerzt.
+		
+		
+	}
+	
+	public ArrayList<Integer> getGekuerzteZeilen(){
+		//Gibt die Liste der gekuerzten Zeilen zurueck. Achten Sie darauf, dass
+		//kein Alias auf das Attribut zurueckgegeben wird.
+	}
+	
+	public ArrayList<Integer> find(String p){
+		//Gibt eine Liste der Zeilen zurueck, die den String p enthalten.
+		
+		
+	}
+	
+	
+	
+	
+}
